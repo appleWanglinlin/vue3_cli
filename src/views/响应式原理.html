@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const user = {
+      name: 'apple',
+      age: 18,
+      obj: {
+        aaa: 'aaa'
+      }
+    }
+    const proxyUser = new Proxy(user, {
+      // 获取目标对象的属性值
+      get(target, prop) {
+        return Reflect.get(target, prop)
+      },
+      // 为目标对象添加和修改新的属性
+      set(target, prop, value) {
+        return Reflect.set(target, prop, value)
+      },
+      // 删除目标对象上的属性
+      deleteProperty(target, prop) {
+        return Reflect.deleteProperty(target, prop)
+      }
+    })
+    // 通过代理对象获取目标对象的属性
+    console.log(proxyUser.name)
+
+    // 通过代理对象更新目标对象的属性值
+    proxyUser.name = 'wll'
+
+    // 通过代理对象像目标对象的添加新属性
+    proxyUser.weight = 50
+    proxyUser.obj.aaa = 'ccc'
+
+    // 通过代理对象删除目标对象的属性
+    delete proxyUser.weight
+    console.log(user)
+  </script>
+</body>
+</html>

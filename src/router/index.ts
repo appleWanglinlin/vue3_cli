@@ -5,7 +5,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    // component: Home
+    component: () => import('../views/计算属性和监视.vue')
   },
   {
     path: '/about',

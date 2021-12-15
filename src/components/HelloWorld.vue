@@ -5,8 +5,10 @@
     <button @click="fn">累加</button>
     <hr>
     {{ user.name }}
-    {{ user.obj.age }}
+    {{ user.obj }}
     <button @click="update">更新数据</button>
+    <hr>
+    <button @click="handleClick">分发事件</button>
   </div>
 </template>
 
@@ -17,9 +19,12 @@ export default defineComponent({
   name: 'HelloWorld',
   props: {
     msg: String,
+    msg3: Number
   },
   // 一个组件选项，在组件被创建之前，props 被解析之后执行。它是组合式 API 的入口。
-  setup() {
+  setup(props, { emit }) {
+    // console.log('props', props)
+    // console.log('context', context)
     // ref 接受一个内部值并返回一个响应式且可变的 ref 对象。ref 对象具有指向内部值的单个 property .value。
     // 一般用来定义一个基本类型的响应数据
     let count = ref(0)
@@ -32,7 +37,8 @@ export default defineComponent({
     const userObj = {
       name: 'apple',
       obj: {
-        age: 18
+        age: 18,
+        arr: [1,2,3]
       }
     }
     const user = reactive(userObj)
@@ -44,12 +50,18 @@ export default defineComponent({
 
       user.name = 'wll'
       user.obj.age = 24
+      user.obj.arr[0] = 0
+    }
+
+    function handleClick() {
+      emit('handleClick', '111')
     }
     return {
       count,
       fn,
       user,
-      update
+      update,
+      handleClick
     }
   }
 });
