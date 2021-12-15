@@ -1,50 +1,61 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript" target="_blank" rel="noopener">typescript</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    {{count}}
+    <button @click="fn">累加</button>
+    <hr>
+    {{ user.name }}
+    {{ user.obj.age }}
+    <button @click="update">更新数据</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 
 export default defineComponent({
   name: 'HelloWorld',
   props: {
     msg: String,
   },
+  // 一个组件选项，在组件被创建之前，props 被解析之后执行。它是组合式 API 的入口。
+  setup() {
+    // ref 接受一个内部值并返回一个响应式且可变的 ref 对象。ref 对象具有指向内部值的单个 property .value。
+    // 一般用来定义一个基本类型的响应数据
+    let count = ref(0)
+    const fn = () => {
+      count.value++
+    }
+    // reactive 返回对象的响应式副本,一个Proxy的代理对象,被代理的目标对象就是reactive中传入的对象
+    // 内部基于ES6的Proxy实现，通过代理对象操作原对象内部数据都是响应式的
+    // userObj-目标对象，user-代理对象
+    const userObj = {
+      name: 'apple',
+      obj: {
+        age: 18
+      }
+    }
+    const user = reactive(userObj)
+    const update = () => {
+      // userObj.name += '===' // 只写这一句，页面不会更新
+
+      // user.name = 'wll' // 写这两句时，使用了user,也使用了userObj，页面会更新
+      // userObj.obj.age = 24
+
+      user.name = 'wll'
+      user.obj.age = 24
+    }
+    return {
+      count,
+      fn,
+      user,
+      update
+    }
+  }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- 添加“scoped”属性，以限制CSS只用于此组件 -->
 <style scoped>
 h3 {
   margin: 40px 0 0;
