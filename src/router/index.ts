@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
     // component: Home
-    component: () => import('../views/计算属性和监视.vue')
+    component: () => import('../views/toRef的使用.vue')
   },
   {
     path: '/about',
