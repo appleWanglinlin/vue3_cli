@@ -2,7 +2,7 @@
   <div class="todos-container">
     <Header :addTodo="addTodo" />
     <List :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo"/>
-    <Footer />
+    <Footer :todos="todos" :allChecked="allChecked" :clearFinished="clearFinished"/>
   </div>
 </template>
 
@@ -35,13 +35,22 @@ export default defineComponent({
     }
     const updateTodo = (todo:Todo, isChecked: boolean) => {
       todo.isChecked = isChecked
-      console.log('todo', todo)
+    }
+    const clearFinished = () => {
+      state.todos = state.todos.filter(todo => !todo.isChecked)
+    }
+    const allChecked = (isChecked:boolean) => {
+      state.todos.forEach(todo => {
+        todo.isChecked = isChecked
+      })
     }
     return {
       ...toRefs(state),
       addTodo,
       deleteTodo,
-      updateTodo
+      updateTodo,
+      clearFinished,
+      allChecked
     }
   }
 })

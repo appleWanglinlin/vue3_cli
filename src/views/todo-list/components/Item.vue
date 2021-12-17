@@ -1,6 +1,6 @@
 <template>
 <div class="todos-item"
-  :style="{backgroundColor: isMouseenter ? 'red' : '#fff', color: isMouseenter ? '#fff' : '#000'}"
+  :style="{backgroundColor: isMouseenter ? 'darkgray' : '#fff', color: isMouseenter ? '#fff' : '#000'}"
   @mouseenter="mouseHandler(true)"
   @mouseleave="mouseHandler(false)"
 >
@@ -23,7 +23,7 @@ export default defineComponent({
       required: true
     },
     todo: {
-      type: Object as () => Todo, // 转为Todo类型
+      type: Object as () => Todo, // 转为Todo类型对象
       required: true
     },
     deleteTodo: {
@@ -66,6 +66,7 @@ export default defineComponent({
 .todos-item {
   display: flex;
   justify-content: space-between;
+  height: 24px;
   text-align: left;
   margin-top: 5px;
   padding: 5px;
