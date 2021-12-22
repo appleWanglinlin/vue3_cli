@@ -1,6 +1,11 @@
 import { onBeforeUnmount, onMounted, reactive } from "vue"
 
-export default function() {
+interface IPoint {
+  x: number,
+  y: number
+}
+
+export default function():IPoint {
   const point = reactive({
     x: 0,
     y: 0
