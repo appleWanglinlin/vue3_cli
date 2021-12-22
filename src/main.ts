@@ -5,11 +5,13 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 
 // 创建应用的实例对象app,类似于之前vue2中的vm,但是比vm更"轻"
 const app = createApp(App)
 // app.mount('#app') 挂载
-app.use(store).use(router).mount('#app')
+app.use(store).use(router).use(ElementPlus).mount('#app')
 
 // vue2中的写法
 // const vm = new Vue({

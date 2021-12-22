@@ -27,4 +27,8 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+.el-popper.is-light,
+.el-popper.is-dark {
+  display: none;
+}
 </style>
