@@ -9,6 +9,7 @@
     <button @click="update">更新数据</button>
     <hr>
     <button @click="handleClick">分发事件</button>
+    <slot name="test"></slot>
   </div>
 </template>
 
@@ -22,7 +23,8 @@ export default defineComponent({
     msg3: Number
   },
   // 一个组件选项，在组件被创建之前，props 被解析之后执行。它是组合式 API 的入口。
-  setup(props, { emit }) {
+  setup(props, context) {
+    console.log('子-context', context)
     // console.log('props', props)
     // console.log('context', context)
     // ref 接受一个内部值并返回一个响应式且可变的 ref 对象。ref 对象具有指向内部值的单个 property .value。
@@ -54,7 +56,7 @@ export default defineComponent({
     }
 
     function handleClick() {
-      emit('handleClick', '111')
+      context.emit('handleClick', '111')
     }
     return {
       count,

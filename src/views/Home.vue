@@ -1,7 +1,11 @@
 <template>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" :msg3="12" @handleClick="handleClick"/>
+    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" :msg3="12" @handleClick="handleClick">
+      <template v-slot:test>
+        <p>测试插槽</p>
+      </template>
+    </HelloWorld>
   </div>
 </template>
 
@@ -20,7 +24,7 @@ export default defineComponent({
   // 在beforeCreate之前调用，此时this为undefined
   setup(props, context){
     console.log('props', props)
-    console.log('context', context)
+    // console.log('context', context)
     console.log('msg', context.attrs.msg3)
     const setupFn = () => {
       console.log('setup-fn')
