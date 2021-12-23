@@ -8,12 +8,16 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive } from 'vue';
+interface IUser{
+  firstName: string,
+  lastName: string,
+  fullName?: string
+}
 export default defineComponent({
   setup() {
-    const user = reactive({
+    const user:IUser = reactive({
       firstName: '',
-      lastName: '',
-      fullName: ''
+      lastName: ''
     })
     user.fullName = computed({
       get() {
