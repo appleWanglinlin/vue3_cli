@@ -6,7 +6,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     // component: Home
-    component: () => import('../views/vue3/customRef.vue')
+    component: () => import('../views/vue3/异步引入和suspense.vue')
   },
   {
     path: '/about',
