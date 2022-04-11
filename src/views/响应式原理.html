@@ -13,6 +13,9 @@
       age: 18,
       obj: {
         aaa: 'aaa'
+      },
+      foo() {
+        console.log('foo', this)
       }
     }
     const proxyUser = new Proxy(user, {
@@ -29,6 +32,7 @@
         return Reflect.deleteProperty(target, prop)
       }
     })
+
     // 通过代理对象获取目标对象的属性
     console.log(proxyUser.name)
 

@@ -7,9 +7,13 @@ import router from './router'
 import store from './store'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import registerDirective from './directive'
+import plugins from './plugin'
 
 // 创建应用的实例对象app,类似于之前vue2中的vm,但是比vm更"轻"
 const app = createApp(App)
+registerDirective(app)
+app.use(plugins)
 // app.mount('#app') 挂载
 app.use(store).use(router).use(ElementPlus).mount('#app')
 
