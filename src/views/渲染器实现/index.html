@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="./renderer.js"></script>
+  <script>
+    const vnode = h('div', { class: 'count-box', id: 'div1', data: 1 }, [
+      h('h1', null, '计数'),
+      h('button', { onClick: function() { console.log('button')} }, '+1')
+    ])
+    mount(vnode, document.querySelector('#app'))
+
+    const vnode1 = h('div', { class: 'count-box', id: 'div2', index: 2 }, [
+      h('h1', null, '计数1'),
+      h('button', { onClick: function() { console.log('button')} }, '+2')
+    ])
+    patch(vnode, vnode1)
+  </script>
+</body>
+</html>
