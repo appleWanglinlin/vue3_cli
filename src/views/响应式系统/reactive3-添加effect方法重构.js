@@ -21,6 +21,10 @@ let activeEffect = null
 const info = { count: 0 }
 const dep = new Dep()
 
+/*
+  这里没有直接dep.depend(effect)，是要使depend()方法没有参数，因为后面要在数据劫持中去调用depend()去收集依赖
+  而在get()方法中是没有副作用函数effect()的
+*/
 function watchEffect(effect) {
   activeEffect = effect
   dep.depend()
